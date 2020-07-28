@@ -1,5 +1,5 @@
 {
-  "name": "acornclone",
+  "name": "walnut",
   "version": "1.0.0",
   "description": "To run this project, download Node.js 14.6 or above.\\ Open the project and run the command 'npm install'.\\ Once that's done, run the command 'npm start' to run the project.",
   "main": "server.js",
@@ -23,13 +23,5 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anthonydo1/Walnut.git"
-  },
-  "bugs": {
-    "url": "https://github.com/anthonydo1/Walnut/issues"
-  },
-  "homepage": "https://github.com/anthonydo1/Walnut#readme"
+  "type": "module"
 }
