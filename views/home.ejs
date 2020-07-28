@@ -42,6 +42,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Merchant</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Collected</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +53,7 @@
                     <td><%= transaction.date %></td>
                     <td><%= transaction.name %></td>
                     <td>$<%= transaction.amount %> </td>
+                    <td>$<%= transaction.rounded %> </td>
                   </tr>
                 <% } %> 
               <% } %>
