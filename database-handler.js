@@ -1,8 +1,24 @@
 import mongoose from 'mongodb';
 import dotenv from 'dotenv';
-import * as plaidFunctions from './plaid-setup.js';
 dotenv.config();
 
+export async function getTransactionData() {
+    
+
+    let transactions = [
+        {
+            date: "7/28",
+            name: "Test Transaction",
+            amount: "100.10",
+            rounded: "0.90"
+        }
+        
+    ];
+    return await transactions;
+}
+
+
+// ALL OLD MONGODB CODE
 const MongoClient = mongoose.MongoClient;
 const url = `mongodb+srv://dbUser:${process.env.DB_PASS}@cluster0.u5bz6.mongodb.net/userdb?retryWrites=true&w=majority`;
 
@@ -59,27 +75,4 @@ export async function updateUserLinkTokens(user_id, access_token, item_id) {
         if (err) throw err;
     })
 }
-
-export async function calculateBalance(user_id) {
-    const transactions = await plaidFunctions.getTransactionData(user_id);
-    let balance = 0;
-    let roundedBalance = 0;
-    if (transactions == null) return [0, 0];
-    for (let transaction of transactions) {
-        if (transaction.amount < 0) continue;
-        balance = balance + transaction.amount;
-        roundedBalance = roundedBalance + Math.ceil(transaction.amount);
-    }
-
-    const query = {
-        id: user_id
-    }
-    const updatedValues = {
-        $set: { balance: balance, roundedBalance: roundedBalance }
-    }
-    await _db.collection('userdb').updateOne(query, updatedValues, (err, res) => {
-        if (err) throw err;
-    })
-
-    return [balance, roundedBalance];
-}
+// ALL OLD MONGODB CODE

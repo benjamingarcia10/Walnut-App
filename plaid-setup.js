@@ -56,20 +56,3 @@ export async function getAccessToken(req, res) {
         //const { accounts, item } = await plaidClient.getAccounts(access_token);
     });
 };
-
-export async function getTransactions(access_token) {
-    let data = {};
-    data = await plaidClient.getTransactions(access_token, '2020-07-01', '2020-07-31', {
-        count: 250,
-        offset: 0
-    });
-
-    return await data.transactions;
-};
-
-export async function getTransactionData(user_id) {
-    let userAccount = await databaseFunctions.getUserAccountByID(user_id);
-    let transactions = await userAccount.access_token !== null ? await getTransactions(userAccount.access_token) : null;
-
-    return await transactions;
-}

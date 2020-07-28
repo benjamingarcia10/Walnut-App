@@ -46,17 +46,20 @@ const isLoggedIn = (req, res, next) => {
 // Example protected and unprotected routes
 app.get('/home', isLoggedIn, async (req, res) => {
     console.log(req.user.displayName);
-    const transactions = await plaidFunctions.getTransactionData(req.user.id);
-    const balances = await databaseFunctions.calculateBalance(req.user.id);
+    const transactions = await databaseFunctions.getTransactionData();
+    
+    // Normal Spending Amount (added up Amount column)
+    const balance = 300;
+    // Total Spending including rounded up amounts (total of Amount column and Collected column)
+    const roundedBalance = 307;
 
-    let difference = balances[1] - balances[0];
-    difference = Math.floor(difference * 100) / 100;
+    let difference = roundedBalance - balance;
 
     const data = {
         name: req.user.displayName,
         transactions: transactions,
-        balance: balances[0],
-        roundedBalance: balances[1],
+        balance: balance,
+        roundedBalance: roundedBalance,
         difference: difference
     }
 
