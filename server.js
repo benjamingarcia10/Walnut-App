@@ -26,7 +26,7 @@ app.use(express.static('public'));
 
 // For an actual app you should configure this with an experation time, better keys, proxy and secure
 app.use(cookieSession({
-    name: 'acornclone-session',
+    name: 'walnut',
     keys: ['key1', 'key2']
 }));
 
