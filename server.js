@@ -64,9 +64,12 @@ app.get('/home', isLoggedIn, async (req, res) => {
         difference += parseFloat(doc.rounded);
     });
 
+    const donations = await databaseFunctions.getDocsInDB('donations');
+
     const data = {
         name: req.user.displayName,
         transactions: transactions,
+        donations: donations,
         balance: balance.toFixed(2),
         roundedBalance: roundedBalance.toFixed(2),
         difference: difference.toFixed(2)
