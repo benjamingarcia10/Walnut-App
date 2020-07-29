@@ -64,7 +64,9 @@ body {
     -webkit-transition: all ease-in .3s;
     transition: all ease-in .3s
 }
-
+.home-page{
+  text-align: center;
+}
 .btn {
     border-radius: 2px;
     text-transform: capitalize;
@@ -130,7 +132,7 @@ body {
     background: none;
     position: relative;
   }
-  
+
 .progress::after {
   content: "";
   width: 100%;
@@ -141,7 +143,7 @@ body {
   top: 0;
   left: 0;
 }
-  
+
 .progress>span {
   width: 50%;
   height: 100%;

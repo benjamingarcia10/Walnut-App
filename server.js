@@ -47,7 +47,7 @@ const isLoggedIn = (req, res, next) => {
 app.get('/home', isLoggedIn, async (req, res) => {
     console.log(req.user.displayName);
     const transactions = await databaseFunctions.getTransactionData();
-    
+
     // Normal Spending Amount (added up Amount column)
     const balance = 300;
     // Total Spending including rounded up amounts (total of Amount column and Collected column)
