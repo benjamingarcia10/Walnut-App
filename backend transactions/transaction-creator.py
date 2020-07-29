@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 # Initiate connection with Cloudant server
-client = Cloudant.iam(os.getenv('SERVICE_USERNAME'), os.getenv('API_KEY'), connect=True)
+client = Cloudant.iam(os.getenv('SERVICE_USERNAME'), os.getenv('CLOUDANT_APIKEY'), connect=True)
 
 # Set desired database name for transactions, rounded up amounts, and donation transactions, respectively
 database_names = {
