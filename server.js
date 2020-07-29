@@ -49,18 +49,27 @@ app.get('/home', isLoggedIn, async (req, res) => {
     const transactions = await databaseFunctions.getDocsInDB('user-transactions');
     
     // Normal Spending Amount (added up Amount column)
-    const balance = 300;
+    let balance = 0;
     // Total Spending including rounded up amounts (total of Amount column and Collected column)
-    const roundedBalance = 304;
+    let roundedBalance = 0;
+    transactions.forEach(doc => {
+        balance += parseFloat(doc.amount);
+        roundedBalance += (parseFloat(doc.amount) + parseFloat(doc.rounded));
+    });
 
-    let difference = roundedBalance - balance;
+    const currentRoundedTransactions = await databaseFunctions.getDocsInDB('round-up');
+    let difference = 0;
+
+    currentRoundedTransactions.forEach(doc => {
+        difference += parseFloat(doc.rounded);
+    });
 
     const data = {
         name: req.user.displayName,
         transactions: transactions,
-        balance: balance,
-        roundedBalance: roundedBalance,
-        difference: difference
+        balance: balance.toFixed(2),
+        roundedBalance: roundedBalance.toFixed(2),
+        difference: difference.toFixed(2)
     }
 
     res.render('home.ejs', { data: data });
