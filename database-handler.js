@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import Cloudant from '@cloudant/cloudant';
 dotenv.config();
 
-export async function getTransactionData() {
-    var cloudant = new Cloudant({
+export async function getDocsInDB(database_name) {
+    let cloudant = new Cloudant({
         url: process.env.CLOUDANT_URL, plugins: {
             iamauth: {
                 iamApiKey: process.env.CLOUDANT_APIKEY
@@ -12,26 +12,15 @@ export async function getTransactionData() {
         }
     });
 
-    var user_transactions_db = cloudant.db.use('user-transactions');
-    var rounded_up_db = cloudant.db.use('round-up');
-    var donations_db = cloudant.db.use('donations');
+    let db = cloudant.db.use(database_name);
+    let result = await db.list({include_docs: true});
+    let docs = [];
 
-    var user_transactions_docs = [];
-    var rounded_up_docs = rounded_up_db.list({ include_docs: true });
-    var donations_docs = donations_db.list({ include_docs: true });
-
-    // Read all DB documents
-    var transactions = function () {
-        user_transactions_db.list({ include_docs: true }, function (err, data) {
-            data.rows.forEach(doc => {
-                user_transactions_docs.push(doc.doc);
-            });
-            console.log(user_transactions_docs);
-        });
-    };
-    transactions();
-    await new Promise(r => setTimeout(r, 5000));
-    return user_transactions_docs;
+    result.rows.forEach(doc => {
+        docs.push(doc.doc);
+        console.log(doc.doc);
+    });
+    return docs;
 }
 
 

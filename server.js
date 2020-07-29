@@ -46,7 +46,7 @@ const isLoggedIn = (req, res, next) => {
 // Example protected and unprotected routes
 app.get('/home', isLoggedIn, async (req, res) => {
     console.log(req.user.displayName);
-    const transactions = await databaseFunctions.getTransactionData();
+    const transactions = await databaseFunctions.getDocsInDB('user-transactions');
     
     // Normal Spending Amount (added up Amount column)
     const balance = 300;
