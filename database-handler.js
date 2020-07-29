@@ -1,20 +1,37 @@
 import mongoose from 'mongodb';
 import dotenv from 'dotenv';
+import Cloudant from '@cloudant/cloudant';
 dotenv.config();
 
 export async function getTransactionData() {
-    
-
-    let transactions = [
-        {
-            date: "7/28",
-            name: "Test Transaction",
-            amount: "100.10",
-            rounded: "0.90"
+    var cloudant = new Cloudant({
+        url: process.env.CLOUDANT_URL, plugins: {
+            iamauth: {
+                iamApiKey: process.env.CLOUDANT_APIKEY
+            }
         }
-        
-    ];
-    return await transactions;
+    });
+
+    var user_transactions_db = cloudant.db.use('user-transactions');
+    var rounded_up_db = cloudant.db.use('round-up');
+    var donations_db = cloudant.db.use('donations');
+
+    var user_transactions_docs = [];
+    var rounded_up_docs = rounded_up_db.list({ include_docs: true });
+    var donations_docs = donations_db.list({ include_docs: true });
+
+    // Read all DB documents
+    var transactions = function () {
+        user_transactions_db.list({ include_docs: true }, function (err, data) {
+            data.rows.forEach(doc => {
+                user_transactions_docs.push(doc.doc);
+            });
+            console.log(user_transactions_docs);
+        });
+    };
+    transactions();
+    await new Promise(r => setTimeout(r, 5000));
+    return user_transactions_docs;
 }
 
 
