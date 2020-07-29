@@ -32,7 +32,7 @@ export async function createLinkToken(req, res) {
     plaidClient.createLinkToken(configs, (err, response) => {
         const link_token = response.link_token;
         console.log(link_token);
-        res.json({link_token});
+        res.json({ link_token });
     });
 };
 

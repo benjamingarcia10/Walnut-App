@@ -47,15 +47,15 @@
             </thead>
             <tbody>
               <% if (data.transactions !== null) {%>
-                <% for (let transaction of data.transactions) { %>
-                  <% if (transaction.amount < 0) { continue; }%>
-                  <tr class="table-default">
-                    <td><%= transaction.date %></td>
-                    <td><%= transaction.name %></td>
-                    <td>$<%= transaction.amount %> </td>
-                    <td>$<%= transaction.rounded %> </td>
-                  </tr>
-                <% } %>
+              <% for (let transaction of data.transactions) { %>
+              <% if (transaction.amount < 0) { continue; }%>
+              <tr class="table-default">
+                <td><%= transaction.date %></td>
+                <td><%= transaction.name %></td>
+                <td>$<%= transaction.amount %> </td>
+                <td>$<%= transaction.rounded %> </td>
+              </tr>
+              <% } %>
               <% } %>
             </tbody>
           </table>
@@ -83,10 +83,12 @@
           <!-- Demo info -->
           <div class="row text-center mt-4">
             <div class="col-6 border-right">
-              <div class="h4 font-weight-bold mb-0">$<%= data.balance %></div><span class="small text-gray">Spendings</span>
+              <div class="h4 font-weight-bold mb-0">$<%= data.balance %></div><span
+                class="small text-gray">Spendings</span>
             </div>
             <div class="col-6">
-              <div class="h4 font-weight-bold mb-0">$<%= data.roundedBalance %></div><span class="small text-gray">Rounded Spendings</span>
+              <div class="h4 font-weight-bold mb-0">$<%= data.roundedBalance %></div><span
+                class="small text-gray">Rounded Spendings</span>
             </div>
           </div>
 
@@ -94,7 +96,7 @@
 
 
           <table class="table table-hover">
-            <h2 class="h6 font-weight-bold text-center mb-4", style="margin-top: 25px">Previous Donations</h2>
+            <h2 class="h6 font-weight-bold text-center mb-4" , style="margin-top: 25px">Previous Donations</h2>
             <thead>
               <tr>
                 <th scope="col">Date</th>
@@ -104,14 +106,14 @@
             </thead>
             <tbody>
               <% if (data.donations !== null) {%>
-                <% for (let donation of data.donations) { %>
-                  <% if (donation.amount < 0) { continue; }%>
-                  <tr class="table-default">
-                    <td><%= donation.date %></td>
-                    <td><%= donation.name %></td>
-                    <td>$<%= donation.amount %> </td>
-                  </tr>
-                <% } %>
+              <% for (let donation of data.donations) { %>
+              <% if (donation.amount < 0) { continue; }%>
+              <tr class="table-default">
+                <td><%= donation.date %></td>
+                <td><%= donation.name %></td>
+                <td>$<%= donation.amount %> </td>
+              </tr>
+              <% } %>
               <% } %>
             </tbody>
           </table>
@@ -132,7 +134,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>$(function () {
 
-    const donationThreshold = 5
+      const donationThreshold = 5
 
       $(".progress").each(function () {
 
@@ -162,7 +164,8 @@
   <script type="text/javascript">
     (async function () {
       const fetchLinkToken = async () => {
-        const response = await fetch('/create_link_token', { method: 'POST',
+        const response = await fetch('/create_link_token', {
+          method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

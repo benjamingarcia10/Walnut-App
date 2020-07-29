@@ -13,7 +13,7 @@ export async function getDocsInDB(database_name) {
     });
 
     let db = cloudant.db.use(database_name);
-    let result = await db.list({include_docs: true});
+    let result = await db.list({ include_docs: true });
     let docs = [];
 
     result.rows.forEach(doc => {
