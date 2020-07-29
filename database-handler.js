@@ -18,7 +18,6 @@ export async function getDocsInDB(database_name) {
 
     result.rows.forEach(doc => {
         docs.push(doc.doc);
-        console.log(doc.doc);
     });
     return docs;
 }

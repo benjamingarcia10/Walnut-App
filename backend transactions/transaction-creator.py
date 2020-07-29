@@ -49,11 +49,12 @@ def clear_databases():
 def create_random_transactions():
     random_amount = round(random.uniform(minimum_transaction_amount, maximum_transaction_amount), 2)
     rounded_amount = round(math.ceil(random_amount) - random_amount, 2)
-    transaction_uuid = str(uuid.uuid4())
+    current_datetime = datetime.now().strftime("%B %d, %Y %H:%M:%S")
+    transaction_uuid = f'{current_datetime} {str(uuid.uuid4())}'
     data = {}
     transaction_data = {
         '_id': transaction_uuid,
-        'date': datetime.now().strftime("%B %d, %Y"),
+        'date': current_datetime,
         'name': random.choice(store_names),
         'amount': f'{random_amount:.2f}',
         'rounded': f'{rounded_amount:.2f}'
@@ -84,8 +85,11 @@ def check_threshold():
     for document in round_up_database:
         round_up_amount += float(document['rounded'].replace('$', ''))
     if round_up_amount >= round_up_threshold:
+        current_datetime = datetime.now().strftime("%B %d, %Y %H:%M:%S")
+        transaction_uuid = f'{current_datetime} {str(uuid.uuid4())}'
         data = {
-            'date': datetime.now().strftime("%B %d, %Y"),
+            '_id': transaction_uuid,
+            'date': current_datetime,
             'name': 'Walnut Donation',
             'amount': f'{round(round_up_amount, 2):.2f}',
         }
