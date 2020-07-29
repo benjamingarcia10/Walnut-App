@@ -53,16 +53,16 @@ def create_random_transactions():
     data = {}
     transaction_data = {
         '_id': transaction_uuid,
-        'date': f'{datetime.now().strftime("%B %d, %Y %H:%M:%S")}',
-        'name': f'{random.choice(store_names)}',
-        'amount': f'${random_amount:.2f}',
-        'rounded': f'${rounded_amount:.2f}'
+        'date': datetime.now().strftime("%B %d, %Y"),
+        'name': random.choice(store_names),
+        'amount': f'{random_amount:.2f}',
+        'rounded': f'{rounded_amount:.2f}'
     }
     data['transaction_data'] = transaction_data
 
     rounded_data = {
         '_id': transaction_uuid,
-        'rounded': f'${rounded_amount:.2f}'
+        'rounded': f'{rounded_amount:.2f}'
     }
     data['rounded_data'] = rounded_data
 
@@ -70,7 +70,7 @@ def create_random_transactions():
 
 
 def add_random_transaction():
-    threading.Timer(1, add_random_transaction).start()
+    threading.Timer(5, add_random_transaction).start()
     new_documents = create_random_transactions()
     new_transaction_document = transactions_database.create_document(new_documents['transaction_data'])
     print(f'{new_transaction_document} added to {transactions_database}.')
@@ -85,9 +85,9 @@ def check_threshold():
         round_up_amount += float(document['rounded'].replace('$', ''))
     if round_up_amount >= round_up_threshold:
         data = {
-            'date': f'{datetime.now().strftime("%B %d, %Y %H:%M:%S")}',
+            'date': datetime.now().strftime("%B %d, %Y"),
             'name': 'Walnut Donation',
-            'amount': f'${round(round_up_amount, 2):.2f}',
+            'amount': f'{round(round_up_amount, 2):.2f}',
         }
         new_donation = donations_database.create_document(data)
         print(f'{new_donation} added to {donations_database}')
