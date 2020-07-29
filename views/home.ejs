@@ -46,16 +46,16 @@
               </tr>
             </thead>
             <tbody>
-              <% if (data.transactions !== null) {%> 
+              <% if (data.transactions !== null) {%>
                 <% for (let transaction of data.transactions) { %>
-                  <% if (transaction.amount < 0) { continue; }%> 
+                  <% if (transaction.amount < 0) { continue; }%>
                   <tr class="table-default">
                     <td><%= transaction.date %></td>
                     <td><%= transaction.name %></td>
                     <td>$<%= transaction.amount %> </td>
                     <td>$<%= transaction.rounded %> </td>
                   </tr>
-                <% } %> 
+                <% } %>
               <% } %>
             </tbody>
           </table>
@@ -98,11 +98,11 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>$(function () {
-    
+
     const donationThreshold = 10
 
       $(".progress").each(function () {
-        
+
         var value = $(this).attr('data-value');
         var left = $(this).find('.progress-left .progress-bar');
         var right = $(this).find('.progress-right .progress-bar');
@@ -129,11 +129,11 @@
   <script type="text/javascript">
     (async function () {
       const fetchLinkToken = async () => {
-        const response = await fetch('/create_link_token', { method: 'POST', 
+        const response = await fetch('/create_link_token', { method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-          } 
+          }
         });
         const responseJSON = await response.json();
         return responseJSON.link_token;
