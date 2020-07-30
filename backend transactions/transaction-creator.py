@@ -78,7 +78,7 @@ def add_random_transaction():
     print(f'New Transaction Added: ${new_transaction_document["amount"]} at {new_transaction_document["name"]}')
     new_rounded_document = round_up_database.create_document(new_documents['rounded_data'])
     #print(f'{new_rounded_document} added to {round_up_database}.')
-    print(f'New Contribution Added: ${new_rounded_document["rounded"]}')
+    print(f'New Contribution Added: ${new_rounded_document["rounded"]}\n')
     check_threshold()
 
 
@@ -97,10 +97,11 @@ def check_threshold():
         }
         new_donation = donations_database.create_document(data)
         #print(f'{new_donation} added to {donations_database}')
+        print(f'${round_up_amount} is over threshold amount of ${round_up_threshold}.')
         print(f'New Donation Added: ${new_donation["amount"]}')
         client.delete_database(database_names['round-up-db-name'])
         client.create_database(database_names['round-up-db-name'], partitioned=False)
-        print("Round Up Database Cleared.")
+        print("Round Up Database Cleared.\n")
 
 
 clear_databases()
