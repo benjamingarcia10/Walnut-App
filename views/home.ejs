@@ -47,7 +47,7 @@
             </thead>
             <tbody>
               <% if (data.transactions !== null) {%>
-              <% for (let transaction of data.transactions) { %>
+              <% for (let transaction of data.transactions.reverse()) { %>
               <% if (transaction.amount < 0) { continue; }%>
               <tr class="table-default">
                 <td><%= transaction.date %></td>
@@ -106,7 +106,7 @@
             </thead>
             <tbody>
               <% if (data.donations !== null) {%>
-              <% for (let donation of data.donations) { %>
+              <% for (let donation of data.donations.reverse()) { %>
               <% if (donation.amount < 0) { continue; }%>
               <tr class="table-default">
                 <td><%= donation.date %></td>
