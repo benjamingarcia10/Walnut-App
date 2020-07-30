@@ -40,10 +40,39 @@ with open('./store-names.txt') as f:
 store_names = [line.strip() for line in store_names]
 
 
+def setup():
+    interval_updated = False
+    clear_updated = False
+    while not interval_updated:
+        try:
+            global repeat_interval
+            repeat_interval = float(input('Enter transaction creation interval (in seconds): '))
+        except:
+            print('Please enter a valid number.')
+        else:
+            interval_updated = True
+
+    while not clear_updated:
+        global clear
+        clear = str(input('Clear databases first? ("y" or "n"): '))
+        if clear.lower() == 'y':
+            clear_databases()
+            print()
+            clear_updated = True
+        elif clear.lower() == 'n':
+            clear_updated = True
+            print()
+            return
+        else:
+            print('Please enter "y" or "n".')
+
+
+
 def clear_databases():
     for database in database_names:
         client.delete_database(database_names[database])
         client.create_database(database_names[database], partitioned=False)
+        print(f'{database_names[database]} database cleared.')
 
 
 def create_random_transactions():
@@ -71,7 +100,7 @@ def create_random_transactions():
 
 
 def add_random_transaction():
-    threading.Timer(5, add_random_transaction).start()
+    threading.Timer(1, add_random_transaction).start()
     new_documents = create_random_transactions()
     new_transaction_document = transactions_database.create_document(new_documents['transaction_data'])
     #print(f'{new_transaction_document} added to {transactions_database}.')
@@ -97,12 +126,12 @@ def check_threshold():
         }
         new_donation = donations_database.create_document(data)
         #print(f'{new_donation} added to {donations_database}')
-        print(f'${round_up_amount} is over threshold amount of ${round_up_threshold}.')
+        print(f'${round_up_amount:.2f} is over threshold amount of ${round_up_threshold:.2f}.')
         print(f'New Donation Added: ${new_donation["amount"]}')
         client.delete_database(database_names['round-up-db-name'])
         client.create_database(database_names['round-up-db-name'], partitioned=False)
         print("Round Up Database Cleared.\n")
 
 
-clear_databases()
+setup()
 add_random_transaction()
