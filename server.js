@@ -12,7 +12,6 @@ passportSetup();
 // MONGODB SERVER CONNECTION
 databaseFunctions.connectToServer((err) => {
     if (err) console.log(err);
-    console.log('Connected to MongoDb');
 })
 
 const app = express();

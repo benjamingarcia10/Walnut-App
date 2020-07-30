@@ -64,7 +64,7 @@
 
       <div class="col-md-6 mb-4">
         <div class="bg-white rounded-lg p-5 shadow">
-          <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
+          <h2 class="h6 font-weight-bold text-center mb-4">Overall Progress to Next Donation</h2>
 
           <!-- Progress bar 1 -->
           <div class="progress mx-auto" data-value='<%= data.difference %>'>
@@ -134,7 +134,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>$(function () {
 
-      const donationThreshold = 5
+      const donationThreshold = 5;
 
       $(".progress").each(function () {
 
@@ -154,7 +154,7 @@
       })
 
       function percentageToDegrees(percentage) {
-        return percentage / donationThreshold * 360
+        return percentage / donationThreshold * 360;
       }
 
     });
