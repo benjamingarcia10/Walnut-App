@@ -69,8 +69,8 @@ app.get('/home', isLoggedIn, async (req, res) => {
         name: req.user.displayName,
         transactions: transactions,
         donations: donations,
-        balance: balance.toFixed(2),
-        roundedBalance: roundedBalance.toFixed(2),
+        balance: balance.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
+        roundedBalance: roundedBalance.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
         difference: difference.toFixed(2)
     }
 
