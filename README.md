@@ -5,4 +5,4 @@ Steps to launching the program:
 3. Through the terminal, navigate into the sjsu-spartans directory and type "npm install"
 4. Type "npm start", the program should now be running at 'http://localhost:3000/'
 
-'https://walnut-app.mybluemix.net/'
+https://walnut-app.mybluemix.net/
