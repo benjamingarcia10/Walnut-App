@@ -100,7 +100,7 @@ def create_random_transactions():
 
 
 def add_random_transaction():
-    threading.Timer(1, add_random_transaction).start()
+    threading.Timer(repeat_interval, add_random_transaction).start()
     new_documents = create_random_transactions()
     new_transaction_document = transactions_database.create_document(new_documents['transaction_data'])
     #print(f'{new_transaction_document} added to {transactions_database}.')
